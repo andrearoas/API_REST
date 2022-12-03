@@ -8,4 +8,4 @@ class Category(models.Model):
 
     @property
     def __str__(self):
-        return f"{self.name_category}"
+        return self.name_category

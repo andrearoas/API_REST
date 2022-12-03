@@ -9,7 +9,7 @@ from apps.crop.choices import container
 
 class Crop(models.Model):
     id = models.BigAutoField(primary_key=True)
-    photo_crop = models.ImageField(upload_to='image_crops')
+    photo_crop = models.ImageField(upload_to='image_crops', )
     name_crop = models.CharField(max_length=30, unique=True)
     name_scie_crop = models.CharField(max_length=30)
     description_crop = models.TextField(max_length=600)
@@ -21,8 +21,6 @@ class Crop(models.Model):
     distance_crops = models.PositiveSmallIntegerField(default=40)
     height_max_crop = models.PositiveSmallIntegerField(default=4)
     type_container = models.CharField(max_length=30, choices=container, default='Ma')
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    id_category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 
     class Meta:
         ordering = ['name_crop']
@@ -30,3 +28,11 @@ class Crop(models.Model):
     @property
     def get_name(self):
         return self.name_crop
+
+    def __str__(self):
+        return self.name_scie_crop
+
+
+class Crop2(models.Model):
+    id_user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, default='')
+    id_category = models.ForeignKey(Category, on_delete=models.CASCADE, null=False, default='')
